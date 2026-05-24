@@ -1,18 +1,57 @@
 import React from "react";
 import "./Movie.scss";
 
-function Movie (props) {
-    return (
-        <div className="movie">
-        <img 
-        className="movie-image"
-        src="https://i.pinimg.com/736x/aa/f7/05/aaf705e06726ce3881288ae4be3ac5fe.jpg"
-        alt="movie"
+function Movie(props) {
+
+  const price = props.price || 300;
+
+  return (
+    <div className="movie">
+
+      <div className="movie-left">
+
+        <img
+          className="movie-image"
+          src={props.poster || "https://via.placeholder.com/80x120"}
+          alt="movie"
         />
-        <p className="movie-text">
-            {props.title}, sala: {props.hall}, cena: {props.price}din
-        </p>
+
+        <div className="movie-buttons">
+
+          <button
+            onClick={() =>
+              props.onReaction(props.title, "Like")
+            }
+          >
+            Like
+          </button>
+
+          <button
+            onClick={() =>
+              props.onReaction(props.title, "Dislike")
+            }
+          >
+            Dislike
+          </button>
+
         </div>
-    );
+
+      </div>
+
+      <p className="movie-text">
+
+        {props.title}
+
+        {props.hall
+          ? `, sala: ${props.hall}`
+          : ", Film još uvek nije u ponudi"}
+
+        , cena: {price}din
+
+      </p>
+
+    </div>
+  );
 }
-export default Movie
+
+export default Movie;

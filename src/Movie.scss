@@ -5,7 +5,9 @@
 }
 
 .movie-image {
-  width: 60px;
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
 }
 
 .movie-text {
