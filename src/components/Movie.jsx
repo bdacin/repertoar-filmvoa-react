@@ -18,19 +18,11 @@ function Movie(props) {
 
         <div className="movie-buttons">
 
-          <button
-            onClick={() =>
-              props.onReaction(props.title, "Like")
-            }
-          >
+          <button onClick={props.onLike}>
             Like
           </button>
 
-          <button
-            onClick={() =>
-              props.onReaction(props.title, "Dislike")
-            }
-          >
+          <button onClick={props.onDislike}>
             Dislike
           </button>
 
@@ -38,17 +30,23 @@ function Movie(props) {
 
       </div>
 
-      <p className="movie-text">
+      <div className="movie-text">
 
-        {props.title}
+        <h3>{props.title}</h3>
 
-        {props.hall
-          ? `, sala: ${props.hall}`
-          : ", Film još uvek nije u ponudi"}
+        <p>Likes: {props.likes}</p>
 
-        , cena: {price}din
+        <p>Dislikes: {props.dislikes}</p>
 
-      </p>
+        <p>
+          {props.hall
+            ? `Sala: ${props.hall}`
+            : "Film još uvek nije u ponudi"}
+        </p>
+
+        <p>Cena: {price} din</p>
+
+      </div>
 
     </div>
   );
