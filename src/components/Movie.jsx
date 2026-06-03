@@ -26,6 +26,10 @@ function Movie(props) {
             Dislike
           </button>
 
+          <button onClick={props.onEdit}>
+            Izmeni
+          </button>
+
         </div>
 
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Movie from "./Movie";
+import MovieForm from "./MovieForm";
 
 function Movies() {
 
@@ -43,6 +44,8 @@ function Movies() {
     }
   ]);
 
+  const [editingIndex, setEditingIndex] = useState(null);
+
   const handleLike = (index) => {
     const updatedMovies = [...movies];
     updatedMovies[index].likes++;
@@ -55,10 +58,37 @@ function Movies() {
     setMovies(updatedMovies);
   };
 
+  const handleAddMovie = (newMovie) => {
+    setMovies([...movies, newMovie]);
+  };
+
+  const handleEditMovie = (updatedMovie) => {
+    const updatedMovies = [...movies];
+
+    updatedMovies[editingIndex] = {
+      ...updatedMovie,
+      likes: updatedMovies[editingIndex].likes,
+      dislikes: updatedMovies[editingIndex].dislikes
+    };
+
+    setMovies(updatedMovies);
+    setEditingIndex(null);
+  };
+
   const today = new Date().toLocaleDateString();
 
   return (
     <div>
+
+      <MovieForm
+        onAddMovie={handleAddMovie}
+        onEditMovie={handleEditMovie}
+        editingMovie={
+          editingIndex !== null
+            ? movies[editingIndex]
+            : null
+        }
+      />
 
       <h1>Repertoar za danas ({today})</h1>
 
@@ -73,6 +103,7 @@ function Movies() {
           dislikes={movie.dislikes}
           onLike={() => handleLike(index)}
           onDislike={() => handleDislike(index)}
+          onEdit={() => setEditingIndex(index)}
         />
       ))}
 
